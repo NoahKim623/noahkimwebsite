@@ -301,6 +301,29 @@
     pointer-events:none;
   }
 
+  /* projects "check out my resume" call-to-action */
+  .resume-cta{
+    width:100%; margin-top:calc(clamp(20px,3vh,36px) - clamp(40px,6vh,80px));
+    display:flex; align-items:center; justify-content:center;
+    gap:clamp(16px,2vw,28px);
+  }
+  .resume-cta-text{
+    font-family:var(--mono); color:#d4d4d4; text-align:center;
+    font-size:clamp(1rem,1.7vw,1.45rem); letter-spacing:.01em;
+  }
+  .resume-btn{
+    flex:none; display:flex; align-items:center; justify-content:center;
+    width:clamp(54px,5.5vw,72px); aspect-ratio:1;
+    color:var(--white); background:transparent;
+    border:2px solid var(--white); border-radius:14px; cursor:pointer;
+    transition:background .22s ease, color .22s ease,
+               transform .26s cubic-bezier(.2,.8,.25,1);
+  }
+  .resume-btn svg{ width:55%; height:55%; }
+  .resume-btn:hover, .resume-btn:focus-visible{ background:var(--white); color:#000; transform:scale(1.06); }
+  .resume-btn:focus-visible{ outline:2px solid #fff; outline-offset:6px; }
+  .resume-btn:active{ transform:scale(.99); }
+
   /* projects timeline (year carousel) — full-bleed so the larger images fit */
   .timeline{
     width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
@@ -973,6 +996,22 @@
   .chess-modal-msg{ color:#fff; font-size:.84rem; letter-spacing:.04em; text-align:center; }
   .chess-modal-row{ display:flex; gap:12px; }
 
+  /* underpromotion picker */
+  .chess-promo{
+    position:absolute; inset:0; z-index:6; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:14px;
+    background:rgba(8,10,9,.5); border-radius:10px; backdrop-filter:blur(2px);
+  }
+  .chess-promo-title{ color:#fff; font-size:.72rem; letter-spacing:.26em; text-transform:uppercase; text-shadow:0 1px 4px #000; }
+  .chess-promo-row{ display:flex; gap:14px; }
+  .chess-promo-pick{
+    width:62px; height:62px; border-radius:12px; cursor:pointer; padding:6px;
+    background:#e9ece9; border:2px solid rgba(255,255,255,.6);
+    box-shadow:0 8px 26px rgba(0,0,0,.5); transition:transform .12s ease, box-shadow .18s ease;
+  }
+  .chess-promo-pick:hover{ transform:translateY(-4px) scale(1.05); box-shadow:0 12px 32px rgba(0,0,0,.6); }
+  .chess-promo-pick img{ width:100%; height:100%; display:block; }
+
   /* CRT-style blip-out */
   .chess-blip{ animation:chess-blip .52s cubic-bezier(.6,0,.4,1) forwards; }
   @keyframes chess-blip{
@@ -1066,7 +1105,7 @@
           </div>
           <div class="flight-text">
             <p class="about-tag">// SECTION 03</p>
-            <p class="flight-body">I've always been drawn to engineering challenges that test my technicality. While I enjoy coding and robotics, my greatest passion is mechanical design; especially designing and building systems that take flight. Whether it's a drone, plane, or rocket, I've always wanted to make things fly.</p>
+            <p class="flight-body">I've always loved engineering challenges that test my technical skills. I really like rocketry, but mechanical design and robotics also hold a place in my heart.</p>
           </div>
           <div class="img-col">
             <button class="imgcard" type="button" aria-label="Photo deck 3, click to send the top photo behind">
@@ -1149,6 +1188,11 @@
             </svg>
           </button>
         </div>
+
+        <div class="resume-cta">
+          <p class="resume-cta-text">Interested? Check out my resume!</p>
+          <a class="resume-btn" href="resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="View my resume"></a>
+        </div>
       </div>
     </div>
   </section>
@@ -1160,7 +1204,7 @@
         <h2 class="about-title contact-title">CONTACT ME!</h2>
         <ul class="contact-list">
           <li>
-            <a class="contact-item" href="mailto:noahkim623@gmail.com">
+            <a class="contact-item" id="emailLink" href="mailto:noahkim623@gmail.com">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>
               <span>noahkim623@gmail.com</span>
             </a>
@@ -1178,22 +1222,16 @@
             </a>
           </li>
           <li>
-            <a class="contact-item" href="https://www.instagram.com/noahkim.chi/" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
-              <span>noahkim.chi</span>
-            </a>
-          </li>
-          <li>
             <a class="contact-item" href="https://github.com/NoahKim623" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.21.7.82.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5Z"/></svg>
               <span>NoahKim623</span>
             </a>
           </li>
           <li>
-            <span class="contact-item">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.432 3c-.21.375-.455.88-.624 1.283a18.27 18.27 0 0 0-5.617 0A12.6 12.6 0 0 0 8.567 3 19.74 19.74 0 0 0 3.677 4.37C.533 9.046-.32 13.58.106 18.057a19.9 19.9 0 0 0 6.073 3.058 14.5 14.5 0 0 0 1.304-2.13 12.9 12.9 0 0 1-2.054-.988c.172-.127.34-.26.503-.395a14.2 14.2 0 0 0 12.135 0c.166.14.335.272.504.395-.656.388-1.345.72-2.057.99.39.74.83 1.452 1.303 2.128a19.84 19.84 0 0 0 6.075-3.058c.5-5.19-.838-9.684-3.582-13.69ZM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.42 0-1.334.953-2.42 2.157-2.42 1.21 0 2.176 1.096 2.157 2.42 0 1.335-.953 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.42 0-1.334.952-2.42 2.157-2.42 1.21 0 2.176 1.096 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg>
-              <span>soulsilvxr</span>
-            </span>
+            <a class="contact-item" href="https://www.instagram.com/noahkim.chi/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+              <span>noahkim.chi</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -1949,6 +1987,7 @@ quat q_mul(quat a, quat b) {
 
     function openEggs(){
       if (!eggOverlay) return;
+      unlockAch('konami');                 // first time the easter-egg menu opens
       eggLastFocused = document.activeElement;
       eggOverlay.classList.add('open');
       if (eggClose) eggClose.focus();
@@ -1982,11 +2021,16 @@ quat q_mul(quat a, quat b) {
   // ---------- achievements data + unlock system ----------
   // listed alphabetically by title; add more entries here as they're earned
   const ACHIEVEMENTS = [
+    { id:'artemis-fowl',      title:'Artemis Fowl',       sub:"Open Nick's secret safe." },
     { id:'asleep',            title:'Asleep',             sub:'Do absolutely nothing.' },
+    { id:'caught-the-bait',   title:'CAUGHT THE BAIT',    sub:'Access the resume.' },
     { id:'custom-domain',     title:'Custom Domain',      sub:'Edit the home text.' },
     { id:'ddr',               title:'DDR',                sub:'Wrong game, buddy.' },
+    { id:'grandmaster',       title:'GRANDMASTER',        sub:'Beat Kevin at his own game.' },
     { id:'hello-world',       title:'HELLO WORLD',        sub:'Open the website for the first time.' },
     { id:'hey-thats-me',      title:"Hey! That's me!",    sub:'Visit the ABOUT tab.' },
+    { id:'konami',            title:'KONAMI',             sub:'Find the Easter Eggs!' },
+    { id:'monster-slayer',    title:'Monster Slayer',     sub:'Kill Silas in cold blood.' },
     { id:'networking',        title:'Networking',         sub:'Reach out to Noah!' },
     { id:'ouroboros',         title:'Ouroboros',          sub:'Visit the ACHIEVEMENTS tab.' },
     { id:'portfolio',         title:'Portfolio',          sub:'Visit the PROJECTS tab.' },
@@ -2057,11 +2101,19 @@ quat q_mul(quat a, quat b) {
     renderAch();
     showAchToast(a);
   }
+  window.unlockAch = unlockAch;   // let separate <script> islands (e.g. chess) award achievements
 
   renderAch();
 
   // HELLO WORLD — 1.3s after the site opens
   setTimeout(() => unlockAch('hello-world'), 1300);
+
+  // CAUGHT THE BAIT — opening the resume from any page (delegated so it works
+  // for any current/future resume link on the page)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest && e.target.closest('a.resume-btn, a[href$="resume.pdf"]');
+    if (link) unlockAch('caught-the-bait');
+  });
 
   // DDR — 25 arrow-key presses in a row (any other key resets the streak)
   (function(){
@@ -2289,6 +2341,7 @@ quat q_mul(quat a, quat b) {
       let revert = null;
       function die(){
         clearTimeout(revert);
+        unlockAch('monster-slayer');           // killed the boss easter egg
         sprite.src = A.img2 || sprite.src;     // evaporate while still in image #2 form
         diePing();
         wrap.classList.add('is-dead');
@@ -2473,7 +2526,7 @@ quat q_mul(quat a, quat b) {
       function press(k){
         if (k === 'clear'){ buf = ''; render(); return; }
         if (k === 'enter'){
-          if (buf === CODE){ teardown(); rainCats(); }
+          if (buf === CODE){ unlockAch('artemis-fowl'); teardown(); rainCats(); }
           else { buf = ''; render(); }     // wrong code → clear and let them retry
           return;
         }
@@ -2504,6 +2557,25 @@ quat q_mul(quat a, quat b) {
   (function(){
     const form = document.getElementById('contactForm');
     if (!form) return;
+    const TO = 'noahkim623@gmail.com';
+    // Build the right webmail compose link from the sender's email domain.
+    function composeURL(senderEmail, subject, body){
+      const domain = (senderEmail.split('@')[1] || '').toLowerCase();
+      const to = encodeURIComponent(TO);
+      const su = encodeURIComponent(subject);
+      const bd = encodeURIComponent(body);
+      const has = (s) => domain.indexOf(s) !== -1;
+      if (has('gmail') || has('googlemail'))
+        return 'https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + su + '&body=' + bd;
+      if (has('outlook') || has('hotmail') || has('live') || has('msn'))
+        return 'https://outlook.live.com/mail/0/deeplink/compose?to=' + to + '&subject=' + su + '&body=' + bd;
+      if (has('yahoo'))
+        return 'https://compose.mail.yahoo.com/?to=' + to + '&subject=' + su + '&body=' + bd;
+      if (has('aol'))
+        return 'https://mail.aol.com/d/compose/?to=' + to + '&subject=' + su + '&body=' + bd;
+      // iCloud, Proton, custom domains, etc. -> hand off to the OS mail client.
+      return 'mailto:' + to + '?subject=' + su + '&body=' + bd;
+    }
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;            // enforce the required fields first
@@ -2511,9 +2583,40 @@ quat q_mul(quat a, quat b) {
       const name = (data.get('name') || '').toString().trim();
       const email = (data.get('email') || '').toString().trim();
       const message = (data.get('message') || '').toString().trim();
-      const subject = encodeURIComponent('Portfolio message from ' + (name || 'someone'));
-      const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
-      window.location.href = 'mailto:noahkim623@gmail.com?subject=' + subject + '&body=' + body;
+      if (!name || !email || !message) return;       // every box must be filled
+      const body = message + '\n\nFrom: ' + name;
+      const url = composeURL(email, 'Sent from Website', body);
+      if (url.indexOf('mailto:') === 0) window.location.href = url;
+      else window.open(url, '_blank', 'noopener');
+    });
+  })();
+
+  // clicking the email row copies the address to the clipboard instead of opening mail
+  (function(){
+    const link = document.getElementById('emailLink');
+    if (!link) return;
+    const ADDR = 'noahkim623@gmail.com';
+    const label = link.querySelector('span');
+    function flash(){
+      if (!label) return;
+      const original = label.textContent;
+      label.textContent = 'Copied to clipboard!';
+      setTimeout(() => { label.textContent = original; }, 1500);
+    }
+    function fallback(text){
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+    }
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(ADDR).then(flash).catch(() => { fallback(ADDR); flash(); });
+      } else {
+        fallback(ADDR); flash();
+      }
     });
   })();
 
@@ -2782,6 +2885,16 @@ quat q_mul(quat a, quat b) {
     return minors.length<=1;           // K vs K, or K+single minor vs K
   }
 
+  // Compact key for threefold-repetition tracking: placement + side to move +
+  // castling rights + en-passant square (everything that defines a "position").
+  function positionKey(s){
+    let k='';
+    for (let i=0;i<64;i++) k += s.board[i] || '.';
+    const c=s.castling;
+    k += '|' + s.turn + (c.wk?'K':'') + (c.wq?'Q':'') + (c.bk?'k':'') + (c.bq?'q':'') + '|' + s.ep;
+    return k;
+  }
+
   // ---- evaluation & search ----------------------------------------------
   function evaluate(s){
     let score=0; const b=s.board;
@@ -2839,31 +2952,50 @@ quat q_mul(quat a, quat b) {
     return best;
   }
 
+  // Pick from the scored root moves. To avoid replaying the exact same game
+  // every time, choose randomly among moves within a margin of the best —
+  // a wide margin early (opening variety) tightening to near-best later.
+  function pickScored(scored, openingPhase){
+    const sorted = scored.slice().sort((a,b)=> b.sc - a.sc);
+    const best = sorted[0].sc;
+    // Don't gamble in sharp positions: when a move is clearly winning/losing
+    // (forced mate or a large eval swing), play the single best move.
+    const margin = (best > MATE-1000 || best < -(MATE-1000)) ? 0
+                 : openingPhase ? 45 : 16;
+    const pool = sorted.filter(x => best - x.sc <= margin);
+    return pool[(Math.random()*pool.length)|0].m;
+  }
+
   // ~2000 strength: iterative deepening to depth 5 with a soft search budget.
-  function bestMove(s, maxDepth, budgetMs){
+  // Root moves are searched with a full window so every score is exact, which
+  // lets us safely randomise among near-best moves (set randomize=false to get
+  // the single strongest move, e.g. for the player's "best move" helper).
+  function bestMove(s, maxDepth, budgetMs, randomize){
+    if (randomize===undefined) randomize=true;
     const root = genLegal(s);
     if (!root.length) return null;
+    if (root.length===1) return root[0];
     orderMoves(root);
     const deadline = performance.now() + budgetMs;
-    let best = root[0];
+    let scored = root.map(m => ({ m, sc:0 }));   // fallback if depth 1 can't finish
     for (let d=1; d<=maxDepth; d++){
-      // search the previous best first for stronger alpha-beta cutoffs
-      const i = root.findIndex(m => m.from===best.from && m.to===best.to && m.promo===best.promo);
-      if (i>0){ const [mm]=root.splice(i,1); root.unshift(mm); }
-      let alpha=-INF, localBest=root[0], localScore=-INF, aborted=false;
+      const local=[]; let aborted=false;
       for (const m of root){
         makeMove(s,m);
-        const sc = -search(s, d-1, -INF, -alpha, 1, deadline);
+        const sc = -search(s, d-1, -INF, INF, 1, deadline);
         unmakeMove(s);
-        if (sc > localScore){ localScore=sc; localBest=m; }
-        if (sc > alpha) alpha = sc;
+        local.push({ m, sc });
         if (performance.now() > deadline){ aborted=true; break; }
       }
-      best = localBest;
-      if (aborted) break;
-      if (localScore > MATE-1000) break;   // forced mate found
+      if (aborted) break;                 // keep last fully-completed depth's scores
+      scored = local;
+      // order the next iteration best-first for stronger deeper cutoffs
+      scored.sort((a,b)=> b.sc - a.sc);
+      root.length=0; for (const x of scored) root.push(x.m);
+      if (scored[0].sc > MATE-1000) break;   // forced mate found
     }
-    return best;
+    if (!randomize) return scored.slice().sort((a,b)=> b.sc - a.sc)[0].m;
+    return pickScored(scored, s.history.length < 16);
   }
 
   // ========================================================================
@@ -2871,6 +3003,13 @@ quat q_mul(quat a, quat b) {
   // ========================================================================
   let overlay=null, state=null, playerColor='w', selected=null,
       legalCache=[], busy=false, gameOver=false, lastMove=null, confettiTimers=[];
+  // draw bookkeeping, tracked at the game level (outside the engine's hot path)
+  let halfmoveClock=0, positionCounts=new Map(), repCount=0;
+
+  function resetDrawTracking(){
+    halfmoveClock=0; repCount=1; positionCounts=new Map();
+    if (state) positionCounts.set(positionKey(state), 1);
+  }
 
   function clearTimers(){ confettiTimers.forEach(t=>clearTimeout(t)); confettiTimers=[]; }
 
@@ -2962,7 +3101,17 @@ quat q_mul(quat a, quat b) {
     return false;
   }
 
-  function applyMove(m){ lastMove=m; makeMove(state,m); }
+  function applyMove(m){
+    lastMove=m;
+    makeMove(state,m);
+    // fifty-move rule: clock resets on a pawn move or any capture, else ticks up
+    if (m.piece.toUpperCase()==='P' || m.captured) halfmoveClock=0;
+    else halfmoveClock++;
+    // threefold repetition: tally how often this exact position has occurred
+    const key = positionKey(state);
+    repCount = (positionCounts.get(key) || 0) + 1;
+    positionCounts.set(key, repCount);
+  }
 
   function doPlayerMove(m){
     applyMove(m);
@@ -2990,7 +3139,7 @@ quat q_mul(quat a, quat b) {
     const plug = overlay.querySelector('.chess-plug'); if (plug) plug.classList.add('spin');
     confettiTimers.push(setTimeout(()=>{
       if (!state) return;
-      const m = bestMove(state, 5, 1600);
+      const m = bestMove(state, 5, 1600, false);
       busy=false;
       if (plug) plug.classList.remove('spin');
       if (m) doPlayerMove(m);
@@ -3008,11 +3157,14 @@ quat q_mul(quat a, quat b) {
       return true;
     }
     if (isInsufficient(state.board)){ gameOver=true; onDraw('Insufficient material — draw.'); return true; }
+    if (repCount>=3){ gameOver=true; onDraw('Threefold repetition — draw.'); return true; }
+    if (halfmoveClock>=100){ gameOver=true; onDraw('Fifty-move rule — draw.'); return true; }
     return false;
   }
 
   // ---- end-of-game outcomes ---------------------------------------------
   function onWin(){
+    if (window.unlockAch) window.unlockAch('grandmaster');   // beat Kevin's chess bot
     setStatus('Checkmate — you beat Kevin! 🎉');
     const plug = overlay.querySelector('.chess-plug'); if (plug) plug.classList.remove('ready');
     rainConfetti();
@@ -3039,6 +3191,27 @@ quat q_mul(quat a, quat b) {
   function rematch(){
     const m=overlay.querySelector('.chess-modal'); if (m) m.remove();
     startGame(playerColor);
+  }
+
+  // underpromotion: let the player choose Q/R/B/N instead of always queening
+  function promptPromotion(moves, cb){
+    const old=overlay.querySelector('.chess-promo'); if (old) old.remove();
+    const wrap=document.createElement('div'); wrap.className='chess-promo';
+    const title=document.createElement('div'); title.className='chess-promo-title';
+    title.textContent='Promote to'; wrap.appendChild(title);
+    const row=document.createElement('div'); row.className='chess-promo-row';
+    for (const pr of ['Q','R','B','N']){
+      const mv = moves.find(m => m.promo===pr); if (!mv) continue;
+      const btn=document.createElement('button'); btn.className='chess-promo-pick';
+      btn.setAttribute('aria-label','Promote to '+pr);
+      const img=document.createElement('img'); img.draggable=false;
+      img.src = imgFor(playerColor==='w' ? pr : pr.toLowerCase()); img.alt = pr;
+      btn.appendChild(img);
+      btn.addEventListener('click', ()=>{ wrap.remove(); cb(mv); });
+      row.appendChild(btn);
+    }
+    wrap.appendChild(row);
+    overlay.querySelector('.chess-panel').appendChild(wrap);
   }
 
   function showModal(msg, buttons){
@@ -3102,6 +3275,7 @@ quat q_mul(quat a, quat b) {
     const md=overlay.querySelector('.chess-modal'); if (md) md.remove();
     state = initialState();
     selected=null; lastMove=null; gameOver=false; busy=false;
+    resetDrawTracking();
     buildBoard();
     legalCache = genLegal(state);
     render();
@@ -3147,8 +3321,12 @@ quat q_mul(quat a, quat b) {
       const sq=e.target.closest('.chess-sq'); if (!sq) return;
       const i=+sq.dataset.idx;
       if (selected!=null){
-        const m = legalCache.find(mv => mv.from===selected && mv.to===i && (mv.promo? mv.promo==='Q' : true));
-        if (m){ doPlayerMove(m); return; }
+        const matches = legalCache.filter(mv => mv.from===selected && mv.to===i);
+        if (matches.length){
+          if (matches[0].promo) promptPromotion(matches, doPlayerMove);
+          else doPlayerMove(matches[0]);
+          return;
+        }
       }
       const p=state.board[i];
       if (p && isWhitePiece(p)===(playerColor==='w')) selectPiece(i);
